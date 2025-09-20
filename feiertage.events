@@ -1,0 +1,15 @@
+\event*{\year-01-01}{\normalfont\itshape Neujahr}
+\event*{\year-01-06}{\normalfont\itshape Hl. Dr. Kön.}
+\event*{\year-04-03}{\normalfont\itshape Karfreitag}
+\event*{\year-04-06}{\normalfont\itshape Ostermontag}
+\event*{\year-05-01}{\normalfont\itshape Tag d. Arbeit}
+\event*{\year-05-14}{\normalfont\itshape Christi Himmelf.}
+\event*{\year-05-25}{\normalfont\itshape Pfingstm.}
+\event*{\year-06-04}{\normalfont\itshape Fronl.}
+\event*{\year-08-15}{\normalfont\itshape Mariä Himmelf.}
+\event*{\year-10-03}{\normalfont\itshape Tag d. Dt. Einh.}
+\event*{\year-11-01}{\normalfont\itshape Allerheiligen}
+\event*{\year-12-25}{\normalfont\itshape 1. Weihn.ft.}
+\event*{\year-12-26}{\normalfont\itshape 2. Weihn.ft.}
+\event*{\year-12-31}{\normalfont\itshape Silvester}
+\endinput

@@ -1,0 +1,126 @@
+% Custom Settings Alexander Krause
+% 
+% (c) Alexander Krause
+%
+%% This program can be redistributed and/or modified under the terms
+%% of the LaTeX Project Public License Distributed from CTAN archives
+%% in directory macros/latex/base/lppl.txt.
+% 
+
+\ProvidesPackage{ark-krause}
+  [2025/09/20 v0.10 Krause]
+
+\def\arklangpkg{ngerman}
+
+\DeclareOption{latin}{\def\arklangpkg{latin}}
+\DeclareOption{ngerman}{\def\arklangpkg{ngerman}}
+\DeclareOption*{\PackageWarning{examplepackage}{Unknown ‘\CurrentOption’}}
+
+\ProcessOptions\relax
+
+\RequirePackage{babel}
+
+\RequirePackage{ark-krause-\arklangpkg}
+
+%%%%%%
+%%
+%   Pakete   %
+%%
+%%%%%%
+
+\RequirePackage{tabularx}
+\RequirePackage{ifthen}
+\RequirePackage{xparse}
+\RequirePackage{verbatim}
+\RequirePackage{pdfpages}%\RequirePackage[a-1b]{pdfx}
+\RequirePackage{longtable}
+\RequirePackage{blindtext}
+
+%%%%%%
+%%
+%   CD   %
+%%
+%%%%%%
+
+%\@ifclassloaded{beamer}{}{\setkomafont{disposition}{\normalcolor\bfseries}}
+
+\RequirePackage{fontspec}
+\RequirePackage{noto}
+
+\RequirePackage{xcolor}
+\definecolor{gregoriocolor}{RGB}{229,53,44}
+
+\definecolor{ARKrot}{RGB}{228,72,38}
+\definecolor{ARKgelb}{RGB}{245,221,0}
+\definecolor{ARKgrau}{RGB}{6,30,53}
+
+%%%%%%
+%%
+%   Lösungen für Arbeitsblätter / Nicht kopierbarer Text   %
+%%
+%%%%%%
+
+\def\nichtkopierbar#1{\textcolor{SpringGreen}{#1}}
+
+%%%%%%
+%%
+%   Langzitat   %
+%%
+%%%%%%
+
+\def\Langzitat#1{\begin{displayquote}#1\end{displayquote}}
+
+%%%%%%
+%%
+%   persönliche Befehle   %
+%%
+%%%%%%
+
+\def\Strasse{Weinleitenweg}
+\def\Hausnummer{2}
+\def\StrHsnr{\Strasse\ \Hausnummer}
+
+\def\PLZ{91224}
+\def\Ort{Pommelsbrunn}
+\def\PLZOrt{\PLZ{} \Ort}
+\def\AdresseKomma{\StrHsnr, \PLZOrt}
+\def\AdresseMinus{\StrHsnr\ -- \PLZOrt}
+
+\def\EMAILprivat{alexander@krse.eu}
+\def\EMAILELKB{alexander.krause@elkb.de}
+\def\EMAILASB{krause@asb-nuernberg.de}
+
+\def\Telefon{0176\,24086052}
+
+%%%%%%
+%%
+%   Typografie   %
+%%
+%%%%%%
+
+\RequirePackage{ark-typo}
+
+%%%%%%
+%%
+%   Sonderzeichen   %
+%%
+%%%%%%
+
+\RequirePackage{textcomp}
+\RequirePackage{amsmath}
+%\RequirePackage{amssymb}
+\RequirePackage{eurosym}
+\RequirePackage{wasysym}
+%\RequirePackage{savesym}\savesymbol{checkmark}
+\RequirePackage{savesym}
+\savesymbol{checkmark}
+\RequirePackage{dingbat}
+%\RequirePackage{mathabx}
+\RequirePackage{pifont}
+\RequirePackage{amssymb}
+\RequirePackage{ifsym}
+\RequirePackage{siunitx}
+
+\endinput
+%%
+%% End of file `krause.sty'.

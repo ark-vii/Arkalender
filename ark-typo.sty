@@ -1,0 +1,321 @@
+\ProvidesPackage{ark-typo}
+  [2025/09/20 v0.27 Krause]
+
+\newif\if@emoji\@emojifalse
+\DeclareOption{emoji}{\@emojitrue}
+\ProcessOptions\relax
+
+\if@emoji
+  \RequirePackage{emoji}
+  \def\statusOffen{\xspace\emoji{hollow-red-circle}\xspace}
+  \def\statusInArbeit{\xspace\emoji{yellow-square}\xspace}
+  \def\statusWartet{\xspace\emoji{hourglass-not-done}\xspace}
+  \def\statusErledigt{\xspace\emoji{check-mark-button}\xspace}
+  \def\statusGescheitert{\xspace\emoji{cross-mark}\xspace}
+\else
+\fi
+
+\RequirePackage{ninecolors}\selectcolormodel{rgb}
+\RequirePackage{xspace}
+%\RequirePackage{enumitem}
+\RequirePackage{epigraph}
+\RequirePackage{multirow}
+\RequirePackage{multicol}
+\RequirePackage{soul}
+\RequirePackage{xcolor}
+\RequirePackage[autostyle=true,german=quotes]{csquotes}
+\definecolor{gregoriocolor}{RGB}{229,53,44}
+
+%%%%%%
+%%
+%   Schriftarten   %
+%%
+%%%%%%
+
+\RequirePackage{noto}
+
+\@ifclassloaded{beamer}{}{
+    \@ifclassloaded{scrlttr2}{}{
+        \@ifclassloaded{tikz-kalender}{}{
+            \addtokomafont{sectioning}{\sffamily}
+            \addtokomafont{title}{\raggedright\sffamily}
+            \addtokomafont{subtitle}{\raggedright\sffamily}
+            \addtokomafont{subject}{\raggedright\sffamily}
+            \addtokomafont{date}{\raggedright\sffamily}
+            \addtokomafont{author}{\raggedright\setlength{\tabcolsep}{0pt}\sffamily}
+        }
+    }
+}
+%%%%%%
+%%
+%   Sonderzeichen   %
+%%
+%%%%%%
+
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{wasysym}
+
+%%%%%%
+%%
+%   Signalfarben   %
+%%
+%%%%%%
+
+\def\signalfarbeAdministrativ{yellow} % HG0
+\def\signalfarbeBildung{green} % HG1
+\def\signalfarbeDienst{red} % HG2
+\def\signalfarbeELKB{violet} % HG2 spec. ELKB
+\def\signalfarbeVersicherung{blue} % HG3
+\def\signalfarbeFinanzen{white} % HG4
+\def\signalfarbeGesundheit{orange} % HG5
+\def\signalfarbeVersorgung{brown} % HG8
+\def\signalfarbePrivat{black} % HG9
+\def\madewithlatex{{\Large Made with \LaTeX.}}
+
+%%%%%%
+%%
+%   Hervorhebung   %
+%%
+%%%%%%
+
+\def\blau{\bgroup\markoverwith{\textcolor{Cerulean!20}{\rule[-.5ex]{2pt}{2.5ex}}}\ULon}
+\def\rot{\bgroup\markoverwith{\textcolor{Red!20}{\rule[-.5ex]{2pt}{2.5ex}}}\ULon}
+\def\gruen{\bgroup\markoverwith{\textcolor{Green!20}{\rule[-.5ex]{2pt}{2.5ex}}}\ULon}
+\def\gelb{\bgroup\markoverwith{\textcolor{Goldenrod!20}{\rule[-.5ex]{2pt}{2.5ex}}}\ULon}
+\def\grau{\bgroup\markoverwith{\textcolor{Gray!20}{\rule[-.5ex]{2pt}{2.5ex}}}\ULon}
+\def\ruber#1{\textcolor{gregoriocolor}{#1}}
+
+\def\Haken{\emoji{hollow-red-circle}}
+\def\Kreuz{\emoji{cross-mark}}
+
+%%%%%%
+%%
+%   Typographie (Schusterjungen, Hurenkinder, Abkürzungen)   %
+%%
+%%%%%%
+
+\RequirePackage{setspace}
+%\RequirePackage[normalem]{ulem}
+
+\interfootnotelinepenalty 10000
+\clubpenalty = 10000 % Keine "Schusterjungen"
+\widowpenalty = 10000 % Keine "Hurenkinder"
+\displaywidowpenalty = 10000 % Keine "Hurenkinder"
+
+\newcommand\zB{\mbox{z.\,B.}\xspace} % typografisch richtiges z. B.
+\newcommand\ZB{\mbox{Z.\,B.}\xspace} % typografisch richtiges z. B.
+\newcommand\ie{\mbox{i.\,e.}\xspace} % typografisch richtiges i. e.
+\newcommand\Ie{\mbox{I.\,e.}\xspace} % typografisch richtiges I. e.
+\newcommand\iVm{\mbox{i.\,V.\,m.}\xspace} % typografisch richtiges i. V. m
+\newcommand\og{\mbox{o.\,g.}\xspace} % typografisch richtiges o. g.
+\newcommand\oae{\mbox{o.\,ä.}\xspace} % typografisch richtiges o. ä.
+%\newcommand\Dh{\mbox{d.\,h.}} % typografisch richtiges d. h.
+%\newcommand\DH{\mbox{D.\,h.}} % typografisch richtiges D. h.
+\newcommand\ieS{\mbox{i.\,e.\,S.}\xspace} % typografisch richtiges i. e. S.
+\newcommand\idR{\mbox{i.\,d.\,R.}\xspace} % typografisch richtiges i. d. R.
+\newcommand\mE{\mbox{m.\,E.}\xspace} % typografisch richtiges m. E.
+\newcommand\va{\mbox{v.\,a.}\xspace} % typografisch richtiges v. a.
+\newcommand\Va{\mbox{V.\,a.}\xspace} % typografisch richtiges V. a.
+\newcommand\entspricht{$\widehat{=}$\xspace}
+\newcommand\sho{\mbox{s.\,o.}\xspace} % typografisch richtiges s. o.
+\newcommand\shu{\mbox{s.\,u.}\xspace} % typografisch richtiges s. u.
+\newcommand\ua{\mbox{u.\,a.}\xspace} % typografisch richtiges u. a.
+\newcommand\uU{\mbox{u.\,U.}\xspace} % typografisch richtiges u. u.
+
+\def\Nummer#1{\mbox{num. #1}}
+\def\Buchstabe#1{\mbox{lit. #1}}
+\def\lfdNummer#1{\mbox{lfd. Nr. #1}}
+
+\def\typoDatumL#1#2#3{\mbox{#1. #2\ #3}}
+\def\typoDatumK#1#2#3{\mbox{#1.#2.#3}}
+\def\typoPar#1#2{\mbox{\S\,#1} \mbox{#2}}
+
+\definecolor{gregoriocolor}{RGB}{229,53,44}
+
+\DeclareTextSymbol{\textlongs}{TS1}{115}
+\DeclareTextSymbolDefault{\textlongs}{TS1}
+
+\newcommand\aeE{\ae\xspace}
+\newcommand\AEE{\AE\xspace}
+
+\newcommand\Ue{Unterfertigte\xspace}
+
+\def\Section#1{\addsec{#1}}
+\def\SubSection#1{\subsection*{#1}\addcontentsline{toc}{subsection}{#1}}
+
+\def\GF#1{{\glqq #1\grqq}} % Gänsefüßchen beide
+\def\GFsub#1{{\glq #1\grq}} % Gänsefüßchen beide
+%\let\GF\say
+\def\Gf#1{{\glqq #1}} % Gänsefüßchen nur links
+\def\gF#1{{#1\grqq}} % Gänsefüßchen nur rechts
+\def\gf#1{{#1}} % Gänsefüßchen keine
+\def\Kaestchen#1{\mbox{{\large\Square} #1}} % Ankreuzkästchen
+
+\newcommand\mal{\xspace$\times$\xspace}
+
+\newcommand\NewPage{\newpage\null\thispagestyle{empty}\newpage}
+
+\let\kopf\maketitle
+\let\titel\title
+\let\untertitel\subtitle
+\let\datum\date
+\let\thema\subject
+\let\akte\subject
+\def\inhalt{\clearpage\tableofcontents\clearpage}
+
+%%%%%%
+%%
+%   Zeitstempel   %
+%%
+%%%%%%
+
+\def\twodigits#1{\ifnum#1<10 0#1\else #1\fi}
+\def\theYear{\the\year}
+\def\theDay{\twodigits{\the\day}}
+\def\theMonth{\twodigits{\the\month}}
+
+\def\leadingzero#1{\ifnum #1<10 0\the#1\else\the#1\fi}
+\def\heute{\leadingzero{\day}.\leadingzero{\month}.\the\year}
+\def\zeitstempel{\the\year\leadingzero{\month}\leadingzero{\day}}
+
+\def\zeitstempeldash{\the\year-\leadingzero{\month}-\leadingzero{\day}}
+
+%%%%%%
+%%
+%   Zeilenabstand wie bei Word   %
+%%
+%%%%%%
+
+\newcommand\MSonespacing{%
+  \setstretch{1}%  default 1.44
+  %\ifcase \@ptsize \relax % 10pt
+  %  \setstretch {1.448}%
+  %\or % 11pt
+  %  \setstretch {1.399}%
+  %\or % 12pt
+  %  \setstretch {1.433}%
+  %\fi
+}
+
+\newcommand\MSonehalfspacing{%
+  \setstretch{1.5}%  default 1.44
+  %\ifcase \@ptsize \relax % 10pt
+  %  \setstretch {1.448}%
+  %\or % 11pt
+  %  \setstretch {1.399}%
+  %\or % 12pt
+  %  \setstretch {1.433}%
+  %\fi
+}
+
+\newcommand\MSdoublespacing{%
+  \setstretch{2}%  default 1.92
+  %\ifcase \@ptsize \relax % 10pt
+  %  \setstretch {1.936}%
+  %\or % 11pt
+  %  \setstretch {1.866}%
+  %\or % 12pt
+  %  \setstretch {1.92}%
+  %\fi
+}
+
+\newcommand\trenner{\begin{center}$\ast$~$\ast$~$\ast$\end{center}}
+
+\newcommand\Trenner{\begin{center}$\ast$~$\ast$~$\ast$\\$\ast$~$\ast$\\$\ast$\end{center}}
+
+
+%%%%%%
+%%
+%   Zweispaltige Listen   %
+%%
+%%%%%%
+
+\newenvironment{itemizetwocol}
+{
+    \begin{multicols}{2}
+    \itemize
+}{
+    \enditemize
+    \end{multicols}
+}
+
+\newenvironment{enumeratetwocol}
+{
+    \begin{multicols}{2}
+    \enumerate
+}{
+    \endenumerate
+    \end{multicols}
+}
+
+%%%%%%
+%%
+%   Dreispaltige Listen   %
+%%
+%%%%%%
+
+\newenvironment{itemizethreecol}
+{
+    \begin{multicols}{3}
+    \itemize
+}{
+    \enditemize
+    \end{multicols}
+}
+
+\newenvironment{enumeratethreecol}
+{
+    \begin{multicols}{3}
+    \enumerate
+}{
+    \endenumerate
+    \end{multicols}
+}
+
+% Phantomüberschriften
+\@ifclassloaded{scrlttr2}{}
+{
+\setcounter{section}{0}
+\setcounter{subsection}{0}
+\setcounter{subsubsection}{0}
+
+\def\psection#1{
+\stepcounter{section}
+\phantomsection
+\addcontentsline{toc}{section}{#1}
+\section*{#1}
+}
+
+\def\psubsection#1{
+\stepcounter{subsection}
+\phantomsubsection
+\addcontentsline{toc}{subsection}{#1}
+\subsection*{#1}
+}
+
+\def\psubsubsection#1{
+\stepcounter{subsubsection}
+\phantomsubsubsection
+\addcontentsline{toc}{subsubsection}{#1}
+\subsubsection*{#1}
+}
+}
+
+\RequirePackage{tabularray}
+\NewTblrTheme{blank}{
+  \DefTblrTemplate{contfoot-text}{normal}{}
+  \SetTblrTemplate{contfoot-text}{normal}
+  \DefTblrTemplate{conthead-text}{normal}{}
+  \SetTblrTemplate{conthead-text}{normal}
+  
+  \DefTblrTemplate{caption-tag}{default}{}
+  \DefTblrTemplate{caption}{default}{}
+  \DefTblrTemplate{conthead}{default}{}
+  \DefTblrTemplate{capcont}{default}{}
+}
+
+\newcommand\ausblitem{\color{gray}\footnotesize\item}
+\newcommand\einblitem{\color{black}\normalsize\item}
+
+\endinput

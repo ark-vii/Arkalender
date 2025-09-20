@@ -1,0 +1,54 @@
+name: Arkalender Release
+on: [push]
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    if: ${{ endsWith(github.event.head_commit.message, 'REL') }}
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v4
+        
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v3
+        with:
+          latexmk_use_lualatex: true
+          root_file: main.tex
+          
+      - name: Uploading artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PDF
+          path: main.pdf
+          
+      - name: Create Pre-Release
+        id: create_pre_release
+        if: ${{ endsWith(github.event.head_commit.message, 'PREL') }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create 2025 --generate-notes --title "Arkalender 2025 – Entwurf" --prerelease
+          
+      - name: Create Release
+        id: create_release
+        if: ${{ !endsWith(github.event.head_commit.message, 'PREL') }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create 2025 --generate-notes --title "Arkalender 2025"
+          
+      - name: Rename Asset File
+        id: rename-asset-file
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run:
+          mv main.pdf arkalender-2025.pdf
+          
+      - name: Upload Arkalender
+        id: upload-sop
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run:
+          gh release upload 2025 './arkalender-2025.pdf'
+          
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
