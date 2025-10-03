@@ -1,20 +1,14 @@
-\documentclass[ngerman,emoji]{tikz-kalender}
+\documentclass[ngerman]{tikz-kalender}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{ark-krause}
 \usepackage{arkalender}
+\usepackage{emoji}
 
 \setup{
   paper=a4,
   year=2025,
   title={\parbox{15cm}{\center Arkalender\\\normalsize Erstellt mit \emoji{heart} und \LaTeX\ am \today}},
   showweeknumbers,
-  titleColor=ARKrot,
-  monthBGcolor=ARKrot,
-  saturdayColor=ARKrot!20,
-  sundayColor=ARKrot,
-  eventColor=ARKgrau!20,
-  periodColor=ARKgrau!20,
   events={%
     feiertage-fest,
     feiertage-\year,
