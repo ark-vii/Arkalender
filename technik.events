@@ -1,0 +1,16 @@
+\IfLeapYear{%
+\event*{\year-10-07}{\mbox{< Heiz}}
+\event*{\year-04-21}{\mbox{Heiz >}}
+\event*{\year-04-21}{\mbox{WinterR >}}
+\event*{\year-04-22}{\mbox{< SommerR}}
+\event*{\year-11-03}{\mbox{SommerR >}}
+\event*{\year-11-04}{\mbox{< WinterR}}
+}{%
+\event*{\year-10-08}{\mbox{< Heiz}}
+\event*{\year-04-22}{\mbox{Heiz >}}
+\event*{\year-11-05}{\mbox{< WinterR}}
+\event*{\year-04-22}{\mbox{WinterR >}}
+\event*{\year-04-23}{\mbox{< SommerR}}
+\event*{\year-11-04}{\mbox{SommerR >}}
+}
+\endinput

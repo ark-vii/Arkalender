@@ -1,0 +1,112 @@
+\ProvidesPackage{arkalender}[2025/10/02 v0.3 ArKalender]
+\RequirePackage{ark-typo}
+\RequirePackage{babel}
+\RequirePackage{luacode}
+
+% ---------- Optionen ----------
+\newif\ifark@ngerman
+\newif\ifark@latin
+\DeclareOption{ngerman}{\ark@ngermantrue}
+\DeclareOption{latin}{\ark@latintrue}
+\ExecuteOptions{ngerman} % Default
+\ProcessOptions\relax
+
+% ---------- Lua-Code ----------
+\begin{luacode*}
+ark_months = {}
+ark_leapday = ""
+ark_endofyear = ""
+
+function ark_set_months_ngerman()
+  ark_months = {
+    "Winter", "Hasel", "Krokus", "Kirsch",
+    "Weinstock", "Holunder", "Weizen", "Rebstock",
+    "Pilz", "Blattrot", "Blätterfall", "Frost",
+    "Schnee"
+  }
+  ark_leapday = "Lichttag"
+  ark_endofyear = "Endtag des Jahres"
+end
+
+function ark_set_months_latin()
+  ark_months = {
+    [[Brum\ae{}]], "Coryli", "Croci", "Pruni",
+    "Vitis", "Sambuci", "Tritici", "Botri",
+    "Fungi", "Versicoloris", "Foliorum", "Frigoris",
+    "Nivis"
+  }
+  ark_leapday = "Dies Lucis"
+  ark_endofyear = "Finis Anni"
+end
+
+-- Makros definieren
+function ark_def_month_macros()
+  local names = {"i","ii","iii","iv","v","vi","vii","viii","ix","x","xi","xii","xiii"}
+  for i=1,#ark_months do
+    tex.sprint(string.format("\\def\\ARK%s{%s}", names[i], ark_months[i]))
+  end
+end
+
+-- Schaltjahrprüfung
+function ark_isleap(year)
+  return (year % 400 == 0) or (year % 4 == 0 and year % 100 ~= 0)
+end
+function leapflag()
+  if ark_isleap(tonumber(tex.toks[0])) then
+    tex.sprint("1")
+  else
+    tex.sprint("0")
+  end
+end
+
+-- Hauptfunktion
+function ark_date(y,m,d)
+  local t = os.time{year=y, month=m, day=d}
+  local day_of_year = os.date("*t", t).yday
+
+  if ark_isleap(y) then
+    if day_of_year == 366 then
+      return string.format("%s %d", ark_endofyear, y)
+    elseif day_of_year == 365 then
+      return string.format("%s %d", ark_leapyear, y)
+    end
+  else
+    if day_of_year == 365 then
+      return string.format("%s %d", ark_endofyear, y)
+    end
+  end
+
+  local month = math.floor((day_of_year-1)/28) + 1
+  local day_in_month = ((day_of_year-1) % 28) + 1
+  return string.format("%d. %s %d", day_in_month, ark_months[month], y)
+end
+\end{luacode*}
+
+% ---------- Sprachwahl ----------
+\ifark@ngerman
+    \directlua{ark_set_months_ngerman(); ark_def_month_macros()}
+\fi
+\ifark@latin
+    \directlua{ark_set_months_latin(); ark_def_month_macros()}
+\fi
+
+% ---------- Makros ----------
+\newcommand{\arktoday}{%
+  \directlua{tex.print(ark_date(\the\year,\the\month,\the\day))}%
+}
+
+\newcommand{\IfLeapYear}[2]{%
+  \edef\yearval{\the\year}%
+  \edef\leapflag{\directlua{tex.toks[0]=\yearval leapflag()}}%
+  \ifnum\leapflag=1
+    % Schaltjahr
+    #1
+  \else
+    % kein Schaltjahr
+    #2
+  \fi
+}
+
+\AtBeginDocument{
+    \renewcommand{\today}{\arktoday}
+}

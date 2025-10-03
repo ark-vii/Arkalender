@@ -1,6 +1,6 @@
-% Custom Settings Alexander Krause
+% Custom Settings \AKName
 % 
-% (c) Alexander Krause
+% (c) \AKName
 %
 %% This program can be redistributed and/or modified under the terms
 %% of the LaTeX Project Public License Distributed from CTAN archives
@@ -8,15 +8,16 @@
 % 
 
 \ProvidesPackage{ark-krause-ngerman}
-  [2024/07/22 v0.2 Krause]
+  [2024/09/30 v0.8 Krause]
 
 \RequirePackage{ark-typo}
 
     \def\hoechsterAbschluss{Geprüfter Fachwirt im Gesundheits- und Sozialwesen}
+    \def\hoechsterAbschlussEN{B. Prof. in Health and Social Services}
     \def\QualifikationPaed{Dozent in der Erwachsenenbildung}
     \def\QualifikationAusb{Fachausbilder Erste Hilfe und (Betriebs-)Sanitätsdienst}
     \def\QualifikationMed{Rettungssanitäter}
-    \def\QualifikationTheol{Kirchliches Examen (KFU)}
+    \def\QualifikationTheol{Prädikant, Kirchliches Examen (KFU)}
     \def\Beruf{\hoechsterAbschluss}
     \def\TitelELKB{Prädikant}
     
@@ -35,5 +36,14 @@
     \def\ARoKname{\Vorname\ \ZweiterVorname\ \Nachname}
     \def\AKname{\Vorname\ \Nachname}
     \def\Aname{\InitialVorname. \Nachname}
+
+    \@ifclassloaded{beamer}{
+        \author[\AKname]{\AKname\\[1em]\tiny \hoechsterAbschlussEN, \\\tiny \QualifikationMed, \QualifikationAusb,\\\tiny \QualifikationTheol}
+    }{
+        \@ifclassloaded{ark-doku}{
+            \autor{\ARKname}
+            \anschrift{\AdresseKomma}
+        }{}
+    }%
 
 \endinput

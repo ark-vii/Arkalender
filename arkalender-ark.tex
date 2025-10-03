@@ -1,0 +1,68 @@
+\documentclass[ngerman,emoji]{tikz-kalender}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{ark-krause}
+\usepackage{arkalender}
+
+\setup{
+  paper=a4,
+  year=2025,
+  title={\parbox{15cm}{\center Arkalender\\\normalsize Erstellt mit \emoji{heart} und \LaTeX\ am \today}},
+  showweeknumbers,
+  titleColor=ARKrot,
+  monthBGcolor=ARKrot,
+  saturdayColor=ARKrot!20,
+  sundayColor=ARKrot,
+  eventColor=ARKgrau!20,
+  periodColor=ARKgrau!20,
+  events={%
+    akobe,
+    akobe2,
+    geburtsdaten-akobe,
+    geburtsdaten-ark,
+    feiertage-fest,
+    feiertage-\year,
+    arkalender,
+    technik,
+  }
+}
+
+\makeatletter
+\def\RN@event@ii#1#2[#3]{%
+  \begingroup
+  \pgfkeys{/RN/event/.cd, #3}%
+  \@tempdima=\RN@eventwidthL
+  \ifRN@showweeknumbers
+    \pgfcalendarifdate{#1}{Monday}{\@tempdima=\RN@eventwidthS}{}%
+  \fi
+  \@ifundefined{event@#1}{%
+    \expandafter\protected@xdef\csname event@#1\endcsname{#2}%
+    \protected@edef\@tempa{\noexpand\@ifundefined{pgf@sh@ns@cal-#1}{}{%
+        \noexpand\node[anchor=south west,inner sep=0pt] at (cal-#1.south east){%
+        \noexpand\RN@formatEvent{\the\@tempdima}{%
+          \noexpand\csname event@#1\endcsname}};%
+      }
+    }%
+    \pgfcalendarifdate{#1}{at most=06-last}% first half-year?
+      {\expandafter\g@addto@macro\expandafter\RN@events@I\expandafter{\@tempa}}%
+      {\expandafter\g@addto@macro\expandafter\RN@events@II\expandafter{\@tempa}}%
+  }{%
+    \expandafter\protected@xdef\csname event@#1\endcsname{%
+      #2, \csname event@#1\endcsname}%
+  }  
+  % \if@tempswa
+  %   \edef\@tempa{%
+  %     \noexpand\ifdate{equals=#1}{\noexpand\tikzset{%
+  %       every day/.style={fill=\RN@eventColor}}}{}%
+  %   }%
+  %   \expandafter\g@addto@macro\expandafter\RN@backgrounds\expandafter{\@tempa}%
+  % \fi
+  \endgroup 
+}
+\makeatother
+
+\def\Akobe{\textit{Akobe}}
+
+\begin{document}
+\makeKalender
+\end{document}

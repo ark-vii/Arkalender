@@ -1,0 +1,83 @@
+% Custom Settings Alexander Krause
+% 
+% (c) Alexander Krause
+%
+%% This program can be redistributed and/or modified under the terms
+%% of the LaTeX Project Public License Distributed from CTAN archives
+%% in directory macros/latex/base/lppl.txt.
+% 
+
+\ProvidesPackage{ark-krause-latin}
+  [2025/07/04 v0.3 Krause]
+
+\RequirePackage{ark-typo}
+
+    \def\InitialVorname{A}
+    \def\VornameLateinNominativ{Alexander}
+    \def\VornameLateinGenitiv{Alexandris}
+    \def\VornameLateinDativ{Alexandri}
+    \def\VornameLateinAkkusativ{Alexandrem}
+    \def\VornameLateinAblativ{Alexandre}
+    
+    \def\KreuzVornameA{Alexander\,+}
+    \def\KreuzVornameB{Alexander\,R.\,+}
+    
+    \def\VornameKreuzLateinNominativ{+\,\VornameLateinNominativ}
+    \def\VornameKreuzLateinGenitiv{+\,\VornameLateinGenitiv}
+    \def\VornameKreuzLateinDativ{+\,\VornameLateinDativ}
+    \def\VornameKreuzLateinAkkusativ{+\,\VornameLateinAkkusativ}
+    \def\VornameKreuzLateinAblativ{+\,\VornameLateinAblativ}
+    
+    \def\ZweiterVornameLateinNominativ{Rolandus}
+    \def\ZweiterVornameLateinGenitiv{Rolandi}
+    \def\ZweiterVornameLateinDativ{Rolando}
+    \def\ZweiterVornameLateinAkkusativ{Rolandum}
+    \def\ZweiterVornameLateinAblativ{Rolando}
+    
+    \def\InitialZweiterVorname{R}
+    
+    \def\NachnameLateinNominativ{Crusius}
+    \def\NachnameLateinGenitiv{Crusii}
+    \def\NachnameLateinDativ{Crusio}
+    \def\NachnameLateinAkkusativ{Crusium}
+    \def\NachnameLateinAblativ{Crusio}
+    
+    \def\ARKnameLateinNominativ{\VornameLateinNominativ\ \InitialZweiterVorname. \NachnameLateinNominativ}
+    \def\ARKnameLateinGenitiv{\VornameLateinGenitiv\ \InitialZweiterVorname. \NachnameLateinGenitiv}
+    \def\ARKnameLateinDativ{\VornameLateinDativ\ \InitialZweiterVorname. \NachnameLateinDativ}
+    \def\ARKnameLateinAkkusativ{\VornameLateinAkkusativ\ \InitialZweiterVorname. \NachnameLateinAkkusativ}
+    \def\ARKnameLateinAblativ{\VornameLateinAblativ\ \InitialZweiterVorname. \NachnameLateinAblativ}
+    
+    \def\ARoKnameLateinNominativ{\VornameLateinNominativ\ \ZweiterVornameLateinNominativ\ \NachnameLateinNominativ}
+    \def\ARoKnameLateinGenitiv{\VornameLateinGenitiv\ \ZweiterVornameLateinGenitiv\ \NachnameLateinGenitiv}
+    \def\ARoKnameLateinDativ{\VornameLateinDativ\ \ZweiterVornameLateinDativ\ \NachnameLateinDativ}
+    \def\ARoKnameLateinAkkusativ{\VornameLateinAkkusativ\ \ZweiterVornameLateinAkkusativ\ \NachnameLateinAkkusativ}
+    \def\ARoKnameLateinAblativ{\VornameLateinAblativ\ \ZweiterVornameLateinAblativ\ \NachnameLateinAblativ}
+    
+    \def\AKnameLateinNominativ{\VornameLateinNominativ\ \NachnameLateinNominativ}
+    \def\AKnameLateinGenitiv{\VornameLateinGenitiv\ \NachnameLateinGenitiv}
+    \def\AKnameLateinDativ{\VornameLateinDativ\ \NachnameLateinDativ}
+    \def\AKnameLateinAkkusativ{\VornameLateinAkkusativ\ \NachnameLateinAkkusativ}
+    \def\AKnameLateinAblativ{\VornameLateinAblativ\ \NachnameLateinAblativ}
+    
+    \def\AnameLateinNominativ{\InitialVorname. \NachnameLateinNominativ}
+    \def\AnameLateinGenitiv{\InitialVorname. \NachnameLateinGenitiv}
+    \def\AnameLateinDativ{\InitialVorname. \NachnameLateinDativ}
+    \def\AnameLateinAkkusativ{\InitialVorname. \NachnameLateinAkkusativ}
+    \def\AnameLateinAblativ{\InitialVorname. \NachnameLateinAblativ}
+    
+    \def\UnterschriftLatExternLang{Alexander Rolandus Crusius}
+    \def\UnterschriftLatExternKurzA{A. R. Crusius}
+    \def\UnterschriftLatExternKurzB{A. Crusius}
+    \def\UnterschriftLatInternA{Crusius}
+    \def\OrtLatein{Po\=melsbru\=n\ae}
+
+\let\caput\maketitle
+\let\titulus\title
+\let\subtitulus\subtitle
+\let\datum\date
+\let\thema\subject
+\let\acta\subject
+\let\continens\tableofcontents
+
+\endinput

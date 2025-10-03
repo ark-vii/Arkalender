@@ -1,12 +1,13 @@
-\documentclass[ngerman]{tikz-kalender}
+\documentclass[ngerman,emoji]{tikz-kalender}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{ark-krause}
+\usepackage{arkalender}
 
 \setup{
   paper=a4,
   year=2025,
-  title={Arkalender},
+  title={\parbox{15cm}{\center Arkalender\\\normalsize Erstellt mit \emoji{heart} und \LaTeX\ am \today}},
   showweeknumbers,
   titleColor=ARKrot,
   monthBGcolor=ARKrot,
@@ -14,7 +15,11 @@
   sundayColor=ARKrot,
   eventColor=ARKgrau!20,
   periodColor=ARKgrau!20,
-  events={akobe,akobe2,geburtsdaten-akobe,geburtsdaten-ark,feiertage,arkalender}
+  events={%
+    feiertage-fest,
+    feiertage-\year,
+    arkalender,
+  }
 }
 
 \makeatletter
@@ -52,23 +57,6 @@
 \makeatother
 
 \def\Akobe{\textit{Akobe}}
-
-\def\AKi{Bruma}
-\def\AKii{Corylus}
-\def\AKiii{Crocus}
-\def\AKiv{Prunus}
-\def\AKv{Vitis}
-\def\AKvi{Sambucus}
-\def\AKvii{Triticum}
-\def\AKviii{Botrus}
-\def\AKix{Fungus}
-\def\AKx{Versicolor}
-\def\AKxi{Caducus}
-\def\AKxii{Frigus}
-\def\AKxiii{Nix}
-
-\def\AKsj{}
-\def\AKfa{Finis Anni}
 
 \begin{document}
 \makeKalender

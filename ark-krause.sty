@@ -8,7 +8,7 @@
 % 
 
 \ProvidesPackage{ark-krause}
-  [2025/09/20 v0.10 Krause]
+  [2025/09/30 v0.13 Krause]
 
 \def\arklangpkg{ngerman}
 
@@ -18,9 +18,9 @@
 
 \ProcessOptions\relax
 
-\RequirePackage{babel}
-
 \RequirePackage{ark-krause-\arklangpkg}
+
+\RequirePackage{babel}
 
 %%%%%%
 %%
@@ -91,6 +91,40 @@
 \def\EMAILASB{krause@asb-nuernberg.de}
 
 \def\Telefon{0176\,24086052}
+
+%%%%%%
+%%
+%   Klassenspezifische Befehle   %
+%%
+%%%%%%
+
+\@ifclassloaded{beamer}{
+    \usepackage{booktabs}
+    \usepackage{csquotes}
+    \usetheme{Antibes}
+    \usecolortheme{beaver}
+    \usefonttheme{serif}
+    \useinnertheme{default}
+    \logo{\includegraphics[height=4em]{schild_beaver.png}}
+    \AtBeginSection[]
+    {
+      \begin{frame}
+        \frametitle{Inhalt}
+        \tableofcontents[%
+            currentsection,
+            subsectionstyle=show/shaded/hide,
+            sectionstyle=show/hide,
+        ]
+      \end{frame}
+    }
+}{
+    \@ifclassloaded{ark-doku}{
+        \logo{\includegraphics[height=2em]{Banner2.png}}
+        \abteilung{\,}
+        \zusatz{\null}
+        \datum{\LaTeX: \today}
+    }{}
+}%
 
 %%%%%%
 %%
