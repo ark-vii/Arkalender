@@ -94,7 +94,7 @@ end
 
 \newcommand{\IfLeapYear}[2]{%
   \begingroup
-  \toks0=\expandafter{\the\year}% Jahr in Lua-Tokens
+  \toks0=\expandafter{\year}% Jahr in Lua-Tokens
   \edef\leapflag{\directlua{leapyearflag()}}%
   \ifnum\leapflag=1
     #1%

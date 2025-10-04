@@ -5,9 +5,12 @@
 \usepackage{arkalender}
 \usepackage{emoji}
 
+\usepackage{xcolor}
+\usepackage{luacode}
+
 \setup{
   paper=a4,
-  year=2025,
+  year=2016,
   title={\parbox{15cm}{\center Arkalender\\\normalsize Erstellt mit \emoji{heart} und \LaTeX\ am \today}},
   showweeknumbers,
   events={%
@@ -50,8 +53,6 @@
   \endgroup 
 }
 \makeatother
-
-\def\Akobe{\textit{Akobe}}
 
 \begin{document}
 \makeKalender
