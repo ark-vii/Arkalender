@@ -27,28 +27,28 @@ jobs:
         if: ${{ endsWith(github.event.head_commit.message, 'PREL') }}
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create 2025 --generate-notes --title "Arkalender 2025 – Entwurf" --prerelease
+        run: gh release create 2025v1.0 --generate-notes --title "Arkalender 2025v1.0 – Entwurf" --prerelease
           
       - name: Create Release
         id: create_release
         if: ${{ !endsWith(github.event.head_commit.message, 'PREL') }}
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create 2025 --generate-notes --title "Arkalender 2025"
+        run: gh release create 2025v1.0 --generate-notes --title "Arkalender 2025v1.0"
           
       - name: Rename Asset File
         id: rename-asset-file
         env:
           GH_TOKEN: ${{ github.token }}
         run:
-          mv arkalender.pdf arkalender-2025.pdf
+          mv arkalender.pdf arkalender-2025v1.0.pdf
           
       - name: Upload Arkalender
         id: upload-sop
         env:
           GH_TOKEN: ${{ github.token }}
         run:
-          gh release upload 2025 './arkalender-2025.pdf'
+          gh release upload 2025v1.0 './arkalender-2025v1.0.pdf'
           
       - name: Push changes
         uses: ad-m/github-push-action@master
