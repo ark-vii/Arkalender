@@ -1,14 +1,20 @@
-\ProvidesPackage{arkalender}[2025/10/04 v0.4 ArKalender]
+\ProvidesPackage{arkalender}[2025/10/14 v0.5 ARKalender]
 \RequirePackage{babel}
 \RequirePackage{luacode}
 
 % ---------- Optionen ----------
 \newif\ifark@ngerman
 \newif\ifark@latin
+\newif\ifark@ARKshort
 \DeclareOption{ngerman}{\ark@ngermantrue}
 \DeclareOption{latin}{\ark@latintrue}
+\DeclareOption{ARKshort}{\ark@ARKshorttrue}
 \ExecuteOptions{ngerman} % Default
 \ProcessOptions\relax
+
+% ---------- Dual ---------
+\def\dual#1{\expandafter\dual@aux#1\@nil}
+\def\dual@aux#1/#2\@nil{\renewcommand{\arraystretch}{0.5}\begin{tabular}[t]{@{}c@{}}#1\\#2\end{tabular}\renewcommand{\arraystretch}{1.0}}
 
 % ---------- Lua-Code ----------
 \begin{luacode*}
@@ -77,6 +83,37 @@ function ark_date(y,m,d)
   local day_in_month = ((day_of_year-1) % 28) + 1
   return string.format("%d. %s %d", day_in_month, ark_months[month], y)
 end
+
+-- Hauptfunktion römische Monate
+function ark_date_short(y,m,d)
+  ark_months_short = {
+    "I.", "II.", "III.", "IV.",
+    "V.", "VI.", "VII.", "VIII.",
+    "IX.", "X.", "XI.", "XII.",
+    "XIII."
+  }
+  ark_leapday_short = "FA."
+  ark_endofyear_short = "FL."
+  
+  local t = os.time{year=y, month=m, day=d}
+  local day_of_year = os.date("*t", t).yday
+
+  if ark_isleap(y) then
+    if day_of_year == 366 then
+      return string.format("%s %d", ark_endofyear_short, y)
+    elseif day_of_year == 365 then
+      return string.format("%s %d", ark_leapyear_short, y)
+    end
+  else
+    if day_of_year == 365 then
+      return string.format("%s %d", ark_endofyear_short, y)
+    end
+  end
+
+  local month = math.floor((day_of_year-1)/28) + 1
+  local day_in_month = ((day_of_year-1) % 28) + 1
+  return string.format("%d. %s %d", day_in_month, ark_months_short[month], y)
+end
 \end{luacode*}
 
 % ---------- Sprachwahl ----------
@@ -90,6 +127,9 @@ end
 % ---------- Makros ----------
 \newcommand{\arktoday}{%
   \directlua{tex.print(ark_date(\the\year,\the\month,\the\day))}%
+}
+\newcommand{\arktodayshort}{%
+  \directlua{tex.print(ark_date_short(\the\year,\the\month,\the\day))}%
 }
 
 \newcommand{\IfLeapYear}[2]{%
@@ -105,5 +145,8 @@ end
 }
 
 \AtBeginDocument{
+    \let\oldtoday\today
     \renewcommand{\today}{\arktoday}
+    \newcommand{\todayshort}{\arktodayshort}
+    \newcommand{\todaydouble}{\dual{\today/\tiny\oldtoday}}
 }
